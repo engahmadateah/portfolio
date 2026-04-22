@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    @apply bg-slate-950 text-white transition-colors duration-500;
+}
+
+/* Selection */
+::selection {
+    @apply bg-cyan-400 text-slate-950;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-cyan-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-cyan-400;
+}
+
+/* Light Mode */
+.light body {
+    @apply bg-white text-slate-900;
+}
+
+.light section {
+    @apply border-slate-200;
+}
+
+.light .bg-slate-900 {
+    @apply bg-white;
+}
+
+.light .border-slate-800 {
+    @apply border-slate-200;
+}
+
+.light .text-slate-400 {
+    @apply text-slate-600;
+}
+
+.light .text-white {
+    @apply text-slate-900;
+}
+
+.light .bg-slate-800 {
+    @apply bg-slate-100;
+}
+
+.light nav {
+    @apply bg-white/80 text-slate-900 border-slate-200 backdrop-blur-xl;
+}
+
+.light nav a {
+    @apply text-slate-900;
+}
+
+.light nav a:hover {
+    @apply text-cyan-500;
+}
+
+.light nav button {
+    @apply bg-white text-slate-900 border-slate-300;
+}
+
+.light #mobile-menu {
+    @apply bg-white border-slate-200 text-slate-900;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
