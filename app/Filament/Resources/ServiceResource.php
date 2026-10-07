@@ -40,7 +40,8 @@ class ServiceResource extends Resource
 
 TextInput::make('slug')
     ->label('الرابط')
-    ->required(),
+    ->required()
+    ->unique(ignoreRecord: true),
 
 Textarea::make('description')
     ->label('الوصف')

@@ -1,66 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A bilingual (English / Arabic) personal portfolio website with a full admin panel, built with **Laravel 11** and **Filament 3**. Everything on the site (projects, services, skills, experience, blog posts, testimonials, CV and site settings) is managed from the dashboard, so no code changes are needed to update content.
 
-## About Laravel
+<!-- Add a live demo link and screenshots here:
+**Live demo:** https://your-site.up.railway.app
+![Home page](docs/home.png)
+-->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Public website**
+- Home page with projects, services, skills, experience and testimonials
+- Project pages with an image gallery (lightbox)
+- Blog with listing and single-post pages
+- Service detail pages
+- Online CV page and downloadable CV file
+- Contact form that stores messages in the database
+- English / Arabic language switch (with RTL-friendly layout), remembered per session
+- Smooth scrolling and scroll animations, custom 404 page
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Admin panel (`/admin`, Filament)**
+- CRUD for Projects (with multiple images), Categories, Services, Skills, Experience, Blog posts and Testimonials
+- Inbox for contact-form messages
+- Site settings (profile info, favicon, CV file)
+- Dashboard stats widget
 
-## Learning Laravel
+**DevOps**
+- Dockerfile and `start.sh` for container deployment
+- Ready-to-use Railway configuration (`railway.toml`, `.env.railway.example`)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Layer | Technology |
+|---|---|
+| Backend | PHP, Laravel 11 |
+| Admin panel | Filament 3.2 |
+| Frontend | Blade, Tailwind CSS 3, Vite |
+| UI libraries | GSAP, Lenis, AOS, GLightbox, Notyf |
+| Database | MySQL / SQLite locally, PostgreSQL in production |
+| Deployment | Docker, Railway |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Requirements
 
-## Laravel Sponsors
+- **PHP 8.2, 8.3 or 8.4** (PHP 8.5 is not supported yet by one of Filament's dependencies, `openspout`)
+- Composer
+- Node.js 18+ and npm
+- MySQL (or SQLite) for local development
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Local setup
 
-### Premium Partners
+```bash
+# 1. Install dependencies
+composer install
+npm install
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# 2. Environment file
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+Open `.env` and set your database. For MySQL:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=portfolio
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Code of Conduct
+Create an empty database named `portfolio`, then:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# 3. Create tables and link storage
+php artisan migrate
+php artisan storage:link
 
-## Security Vulnerabilities
+# 4. Create your admin account
+php artisan make:filament-user
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 5. Build assets and run
+npm run build
+php artisan serve
+```
+
+- Site: http://127.0.0.1:8000
+- Admin panel: http://127.0.0.1:8000/admin
+
+For front-end development with hot reload, run `npm run dev` in a second terminal.
+
+> No default user is seeded, on purpose. Always create the admin with `php artisan make:filament-user`.
+
+## Deployment (Railway)
+
+The project ships with a `Dockerfile` and `railway.toml`.
+
+1. Push the repository to GitHub and create a new Railway project from it.
+2. Add a **PostgreSQL** service.
+3. In **Variables**, copy the values from `.env.railway.example` (set a real `APP_KEY` and `APP_URL`).
+4. Deploy. On start, `start.sh` runs migrations, links storage and caches config, routes and views.
+5. Create the admin user once from the Railway shell: `php artisan make:filament-user`.
+
+## Project structure
+
+```
+app/
+  Filament/Resources/   Admin CRUD resources
+  Filament/Widgets/     Dashboard widgets
+  Http/Controllers/     Home, Project, Blog, Service, Contact
+  Http/Middleware/      SetLocale (EN / AR)
+  Models/               Project, Post, Service, Skill, Experience, ...
+resources/views/        Blade templates
+lang/                   Arabic translations
+database/migrations/    Schema
+```
+
+## Testing
+
+```bash
+php artisan test
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Personal project. All rights reserved unless stated otherwise.

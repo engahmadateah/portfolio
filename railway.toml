@@ -1,2 +1,7 @@
-[variables]
-NIXPACKS_PHP_EXTENSIONS = "intl zip"
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/up"
+restartPolicyType = "ON_FAILURE"

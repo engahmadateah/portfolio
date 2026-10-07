@@ -29,8 +29,10 @@ class HomeController extends Controller
         }
         $projects = Project::query()
             ->when(request('search'), function ($query) {
-                $query->where('title', 'like', '%' . request('search') . '%')
+                $query->where(function ($q) {
+                    $q->where('title', 'like', '%' . request('search') . '%')
                       ->orWhere('description', 'like', '%' . request('search') . '%');
+                });
             })
             ->when(request('category'), function ($query) {
                 $query->where('category_id', request('category'));

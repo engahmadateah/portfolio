@@ -29,7 +29,7 @@
         <a href="/#services"
            class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-10 transition">
             <i class="fa-solid fa-arrow-left"></i>
-            العودة للخدمات
+            {{ __('Back to services') }}
         </a>
 
         <!-- CARD -->
@@ -65,20 +65,20 @@
 
                 <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
                     <i class="fa-solid fa-bolt text-cyan-400 mb-3 text-xl"></i>
-                    <p class="font-semibold">أداء عالي</p>
-                    <p class="text-sm text-slate-400 mt-1">حلول سريعة ومبنية باحتراف</p>
+                    <p class="font-semibold">{{ __('High performance') }}</p>
+                    <p class="text-sm text-slate-400 mt-1">{{ __('Fast solutions built professionally') }}</p>
                 </div>
 
                 <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
                     <i class="fa-solid fa-shield-halved text-cyan-400 mb-3 text-xl"></i>
-                    <p class="font-semibold">أمان قوي</p>
-                    <p class="text-sm text-slate-400 mt-1">حماية متقدمة للأنظمة</p>
+                    <p class="font-semibold">{{ __('Strong security') }}</p>
+                    <p class="text-sm text-slate-400 mt-1">{{ __('Advanced protection for systems') }}</p>
                 </div>
 
                 <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
                     <i class="fa-solid fa-wand-magic-sparkles text-cyan-400 mb-3 text-xl"></i>
-                    <p class="font-semibold">تصميم حديث</p>
-                    <p class="text-sm text-slate-400 mt-1">UI/UX مستوحى من أفضل الشركات</p>
+                    <p class="font-semibold">{{ __('Modern design') }}</p>
+                    <p class="text-sm text-slate-400 mt-1">{{ __('UI/UX inspired by the best companies') }}</p>
                 </div>
 
             </div>
@@ -94,7 +94,7 @@
 
                     <span class="relative z-10 flex items-center gap-2">
                         <i class="fa-solid fa-paper-plane"></i>
-                        اطلب هذه الخدمة
+                        {{ __('Request this service') }}
                     </span>
 
                     <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-20 transition"></div>
@@ -106,7 +106,7 @@
                           transition flex items-center gap-2 text-slate-300">
 
                     <i class="fa-solid fa-layer-group"></i>
-                    شاهد المشاريع
+                    {{ __('View projects') }}
                 </a>
 
             </div>

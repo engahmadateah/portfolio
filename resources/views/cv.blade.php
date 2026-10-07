@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'السيرة الذاتية')
+@section('title', __('Resume'))
 
 @section('content')
 <section class="py-20 min-h-screen">
@@ -17,19 +17,19 @@
                 </p>
             </div>
 
-            @if($setting?->cv_file)
+            @if(file_exists(public_path('files/cv.pdf')))
                 <a
-                    href="{{ asset('storage/' . $setting->cv_file) }}"
-                    target="_blank"
+                    href="{{ asset('files/cv.pdf') }}"
+                    download="CV.pdf"
                     class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-2xl font-bold"
                 >
-                    تحميل PDF
+                    {{ __('Download PDF') }}
                 </a>
             @endif
         </div>
 
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 mb-10">
-            <h2 class="text-3xl font-bold mb-6">الخبرات</h2>
+            <h2 class="text-3xl font-bold mb-6">{{ __('Experience') }}</h2>
 
             <div class="space-y-6">
                 @foreach($experiences as $experience)
@@ -44,7 +44,7 @@
         </div>
 
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8">
-            <h2 class="text-3xl font-bold mb-6">المهارات</h2>
+            <h2 class="text-3xl font-bold mb-6">{{ __('Skills') }}</h2>
 
             <div class="grid md:grid-cols-2 gap-5">
                 @foreach($skills as $skill)

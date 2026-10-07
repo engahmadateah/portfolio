@@ -6,7 +6,6 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@tailwindcss/vite": "^4.2.2",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
@@ -16,14 +15,12 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
-        "@heroicons/react": "^2.2.0",
-        "@studio-freight/lenis": "^1.0.42",
         "@tailwindcss/forms": "^0.5.11",
         "@tailwindcss/typography": "^0.5.19",
         "aos": "^2.3.4",
-        "framer-motion": "^12.38.0",
+        "glightbox": "^3.3.1",
         "gsap": "^3.15.0",
-        "lucide": "^1.8.0",
-        "lucide-react": "^1.8.0"
+        "lenis": "^1.1.18",
+        "notyf": "^3.10.0"
     }
 }

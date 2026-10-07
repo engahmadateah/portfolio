@@ -40,13 +40,13 @@
         <!-- TITLE -->
         <p class="text-2xl md:text-3xl font-semibold text-slate-200 mt-6 flex items-center justify-center gap-2">
             <i class="fa-solid fa-ban text-red-400"></i>
-            الصفحة غير موجودة
+            {{ __('Page not found') }}
         </p>
 
         <!-- DESCRIPTION -->
         <p class="text-slate-400 leading-7 mt-4 mb-10">
-            يبدو أن الرابط غير صحيح أو تم حذف الصفحة.<br>
-            لا تقلق، نرجعك مباشرة للمسار الصحيح 🚀
+            {{ __('It looks like the link is incorrect or the page was deleted.') }}<br>
+            {{ __('No worries, we will take you straight back on track 🚀') }}
         </p>
 
         <!-- ACTIONS -->
@@ -61,7 +61,7 @@
 
                 <span class="relative z-10 flex items-center gap-2">
                     <i class="fa-solid fa-house"></i>
-                    العودة للرئيسية
+                    {{ __('Back to home') }}
                 </span>
 
                 <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-20 transition"></div>
@@ -74,7 +74,7 @@
                       transition text-slate-300 flex items-center gap-2">
 
                 <i class="fa-solid fa-arrow-left"></i>
-                رجوع
+                {{ __('Go back') }}
             </button>
 
         </div>
@@ -82,7 +82,7 @@
         <!-- SMALL HELP TEXT -->
         <div class="mt-10 text-xs text-slate-500 flex items-center justify-center gap-2">
             <i class="fa-solid fa-shield-halved"></i>
-            خطأ 404 - الصفحة غير متاحة حالياً
+            {{ __('Error 404 - page currently unavailable') }}
         </div>
 
     </div>

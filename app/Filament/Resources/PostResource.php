@@ -34,7 +34,8 @@ class PostResource extends Resource
                 ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
             
             TextInput::make('slug')
-                ->required(),
+                ->required()
+                ->unique(ignoreRecord: true),
             
             Textarea::make('excerpt')
                 ->rows(3)

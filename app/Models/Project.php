@@ -17,7 +17,7 @@ class Project extends Model
         'live_url',
         'technologies',
         'is_featured',
-        'content',
+        'category_id',
     ];
     public function category()
 {

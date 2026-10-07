@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'الرئيسية')
-@section('meta_description', 'معرض أعمال وخدمات مطور Laravel و PHP مع مشاريع احترافية ولوحات تحكم ومتاجر إلكترونية.')
-@section('meta_keywords', 'Laravel Developer, PHP Developer, Portfolio, مشاريع Laravel, برمجة مواقع')
+@section('title', __('Home'))
+@section('meta_description', __('Portfolio and services of a Laravel and PHP developer, with professional projects, dashboards, and online stores.'))
+@section('meta_keywords', __('Laravel Developer, PHP Developer, Portfolio, Laravel Projects, Web Development'))
 @section('content')
 
-<section class="relative min-h-screen flex items-center overflow-hidden bg-slate-900 text-white">
+<section data-hero-parallax class="relative min-h-screen flex items-center overflow-hidden bg-slate-900 text-white">
 
     <!-- Dynamic background -->
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(6,182,212,0.15),transparent_40%)]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(99,102,241,0.15),transparent_40%)]"></div>
+    <div data-parallax-depth="14" class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(6,182,212,0.15),transparent_40%)]"></div>
+    <div data-parallax-depth="22" class="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(99,102,241,0.15),transparent_40%)]"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
 
@@ -18,28 +18,28 @@
 
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full 
-                        border border-white/10 bg-white/5 backdrop-blur-xl
-                        text-cyan-300 text-sm shadow-lg shadow-cyan-500/5
-                        hover:scale-105 transition duration-300">
+                        border border-cyan-400/30 bg-cyan-400/10 backdrop-blur-xl
+                        text-cyan-300 font-semibold text-sm shadow-lg shadow-cyan-500/10
+                        hover:scale-105 hover:bg-cyan-400/15 transition duration-300">
                 <i class="fa-solid fa-code"></i>
                 Software Engineer
             </div>
 
             <!-- Greeting -->
-            <p class="text-cyan-300 mb-4 text-lg flex items-center gap-2">
+            <p data-hero-in class="text-cyan-300 mb-4 text-lg flex items-center gap-2">
                 <i class="fa-solid fa-hand-sparkles animate-pulse"></i>
-                مرحباً 👋 أنا
+                {{ __('Hello I am') }}
             </p>
 
             <!-- Name -->
-            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
-                <span class="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-                    {{ $setting?->hero_title ?? 'اسمك هنا' }}
+            <h1 data-hero-in class="text-5xl md:text-7xl font-black leading-tight mb-6">
+                <span class="text-gradient-animate bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                    {{ $setting?->hero_title ?? __('Your name here') }}
                 </span>
             </h1>
 
             <!-- Subtitle -->
-            <h2 class="text-2xl md:text-3xl text-slate-300 mb-6 flex items-center gap-3">
+            <h2 data-hero-in class="text-2xl md:text-3xl text-slate-300 mb-6 flex items-center gap-3">
                 <span class="flex items-center justify-center w-11 h-11 rounded-xl 
                              bg-white/5 border border-white/10 backdrop-blur-md
                              text-cyan-300 shadow-inner">
@@ -49,13 +49,13 @@
             </h2>
 
             <!-- Description -->
-            <p class="text-slate-400 leading-8 text-lg mb-10 max-w-xl">
-                أبني أنظمة احترافية عالية الأداء باستخدام Laravel و PHP مع تجربة مستخدم سلسة وتصميم عصري يحاكي المنتجات العالمية.
+            <p data-hero-in class="text-slate-400 leading-8 text-lg mb-10 max-w-xl">
+                {{ __('I build high-performance professional systems with Laravel and PHP, with a smooth user experience and a modern design that rivals world-class products.') }}
             </p>
 
             <!-- Tech Stack -->
-            <div class="flex flex-wrap gap-3 mb-10">
-                @foreach(['Laravel','PHP','MySQL','API'] as $tech)
+            <div data-hero-in class="flex flex-wrap gap-3 mb-10">
+                @foreach($skills as $skill)
                 <span class="px-4 py-2 rounded-full 
                              bg-white/5 border border-white/10 
                              text-slate-300 text-sm
@@ -63,40 +63,57 @@
                              hover:bg-cyan-500/10 hover:border-cyan-400/30
                              hover:text-white
                              transition-all duration-300">
-                    {{ $tech }}
+                    {{ $skill->name }}
                 </span>
                 @endforeach
             </div>
 
             <!-- Buttons -->
-            <div class="flex flex-wrap gap-5">
+            <div data-hero-in class="flex flex-wrap gap-5">
 
                 <!-- Primary -->
                 <a href="#projects"
-                   class="group relative inline-flex items-center gap-2 px-7 py-3 rounded-2xl font-bold text-white
+                   class="group btn-shine relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold text-white
                           bg-gradient-to-r from-cyan-500 to-blue-600
-                          overflow-hidden transition duration-300">
+                          overflow-hidden shadow-lg shadow-cyan-500/20
+                          transition-all duration-300 ease-out
+                          hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/40 active:translate-y-0">
 
-                    <!-- Glow hover -->
-                    <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
+                    <i class="fa-solid fa-briefcase text-sm"></i>
+                    {{ __('View my work') }}
 
-                    <i class="fa-solid fa-briefcase transition group-hover:rotate-6"></i>
-                    مشاهدة أعمالي
+                    <i class="fa-solid fa-arrow-left rtl:rotate-0 rotate-180 text-sm w-0 opacity-0
+                              group-hover:w-4 group-hover:opacity-100
+                              transition-all duration-300 ease-out"></i>
                 </a>
 
                 <!-- Secondary -->
                 <a href="#contact"
-                   class="group inline-flex items-center gap-2 px-7 py-3 rounded-2xl font-bold
-                          border border-white/10 bg-white/5 backdrop-blur-xl
-                          text-slate-200
-                          hover:bg-cyan-500/10 hover:border-cyan-400/40 hover:text-white
-                          transition-all duration-300">
+                   class="group relative inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold
+                          border border-white/15 bg-white/5 backdrop-blur-xl
+                          text-slate-200 overflow-hidden
+                          transition-all duration-300 ease-out
+                          hover:-translate-y-0.5 hover:border-cyan-400/50 hover:text-white
+                          hover:shadow-lg hover:shadow-cyan-500/10">
 
-                    <i class="fa-solid fa-envelope transition group-hover:-translate-y-1"></i>
-                    تواصل معي
+                    <span class="absolute inset-0 -z-10 bg-cyan-500/10 scale-x-0 group-hover:scale-x-100
+                                 origin-left rtl:origin-right transition-transform duration-300 ease-out"></span>
+
+                    <i class="fa-solid fa-envelope text-sm transition-transform duration-300 group-hover:scale-110"></i>
+                    {{ __('Contact me') }}
                 </a>
 
             </div>
+
+            @if(file_exists(public_path('files/cv.pdf')))
+            <a data-hero-in href="{{ asset('files/cv.pdf') }}" download="CV.pdf"
+               class="group mt-6 inline-flex items-center gap-2 text-slate-400 hover:text-cyan-300 transition w-fit">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                <span class="border-b border-transparent group-hover:border-cyan-400/60 transition">
+                    {{ __('Download CV') }}
+                </span>
+            </a>
+            @endif
 
         </div>
 
@@ -193,25 +210,25 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
             </div>
 
             <!-- TITLE (FIXED) -->
-            <h2 class="text-4xl md:text-6xl font-black mb-6 pb-2 leading-[1.2]
+            <h2 data-aos="fade-right" class="text-4xl md:text-6xl font-black mb-6 pb-2 leading-[1.2]
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                        text-transparent bg-clip-text">
-                من أنا
+                {{ __('About me') }}
             </h2>
 
             <p class="text-slate-400 leading-9 text-lg mb-6 max-w-xl">
                 {{ $setting?->about_text ?? 
-                'أنا مهندس برمجيات متخصص في تطوير تطبيقات الويب باستخدام Laravel و PHP و MySQL. أحب بناء الأنظمة الاحترافية ولوحات التحكم الحديثة، وأركز دائماً على الأداء وتجربة المستخدم.' }}
+                __('I am a software engineer specialized in building web applications with Laravel, PHP, and MySQL. I love building professional systems and modern dashboards, and I always focus on performance and user experience.') }}
             </p>
 
             <p class="text-slate-500 leading-8 max-w-xl">
-                أعمل على بناء مواقع، متاجر إلكترونية، لوحات تحكم، APIs، وأنظمة مخصصة للشركات والأفراد.
+                {{ __('I build websites, online stores, dashboards, APIs, and custom systems for companies and individuals.') }}
             </p>
 
         </div>
 
         <!-- STATS -->
-        <div class="relative group">
+        <div data-aos="fade-left" class="relative group tilt-card">
 
             <!-- Glow -->
             <div class="absolute inset-0 
@@ -241,9 +258,9 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                    bg-gradient-to-r from-cyan-300 to-blue-400
                                    text-transparent bg-clip-text
                                    transition duration-300 group-hover/stat:scale-110">
-                            3+
+                            <span data-counter="3" data-counter-suffix="+">0+</span>
                         </h3>
-                        <p class="text-slate-500">سنوات خبرة</p>
+                        <p class="text-slate-500">{{ __('Years of experience') }}</p>
                     </div>
 
                     <div class="group/stat">
@@ -251,9 +268,9 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                    bg-gradient-to-r from-cyan-300 to-blue-400
                                    text-transparent bg-clip-text
                                    transition duration-300 group-hover/stat:scale-110">
-                            20+
+                            <span data-counter="20" data-counter-suffix="+">0+</span>
                         </h3>
-                        <p class="text-slate-500">مشروع منفذ</p>
+                        <p class="text-slate-500">{{ __('Projects completed') }}</p>
                     </div>
 
                     <div class="group/stat">
@@ -261,9 +278,9 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                    bg-gradient-to-r from-cyan-300 to-blue-400
                                    text-transparent bg-clip-text
                                    transition duration-300 group-hover/stat:scale-110">
-                            10+
+                            <span data-counter="10" data-counter-suffix="+">0+</span>
                         </h3>
-                        <p class="text-slate-500">عميل</p>
+                        <p class="text-slate-500">{{ __('Clients') }}</p>
                     </div>
 
                     <div class="group/stat">
@@ -271,9 +288,9 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                    bg-gradient-to-r from-cyan-300 to-blue-400
                                    text-transparent bg-clip-text
                                    transition duration-300 group-hover/stat:scale-110">
-                            100%
+                            <span data-counter="100" data-counter-suffix="%">0%</span>
                         </h3>
-                        <p class="text-slate-500">رضا العملاء</p>
+                        <p class="text-slate-500">{{ __('Client satisfaction') }}</p>
                     </div>
 
                 </div>
@@ -300,15 +317,15 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
     <div class="relative max-w-7xl mx-auto px-6">
 
         <!-- Title -->
-        <div class="mb-14">
+        <div data-aos="fade-up" class="mb-14">
             <h2 class="text-4xl md:text-6xl font-black leading-[1.2] md:leading-[1.1] mb-4 
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                        text-transparent bg-clip-text pb-2">
-                المهارات
+                {{ __('Skills') }}
             </h2>
 
             <p class="text-slate-400 max-w-xl">
-                مجموعة التقنيات التي أستخدمها لبناء أنظمة احترافية عالية الأداء.
+                {{ __('The technologies I use to build professional, high-performance systems.') }}
             </p>
         </div>
 
@@ -317,7 +334,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             @foreach($skills as $skill)
 
-            <div class="group relative">
+            <div data-aos="fade-up" class="group relative">
 
                 <!-- Glow -->
                 <div class="absolute inset-0 
@@ -425,15 +442,15 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
     <div class="relative max-w-7xl mx-auto px-6">
 
         <!-- Title -->
-        <div class="mb-16">
+        <div data-aos="fade-up" class="mb-16">
             <h2 class="text-4xl md:text-6xl font-black leading-[1.2] md:leading-[1.1] mb-4 pb-2
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                        text-transparent bg-clip-text">
-                الخبرات العملية
+                {{ __('Work experience') }}
             </h2>
 
             <p class="text-slate-400 max-w-xl">
-                مسار عملي في تطوير الأنظمة وبناء حلول برمجية احترافية.
+                {{ __('A professional path in developing systems and building software solutions.') }}
             </p>
         </div>
 
@@ -442,7 +459,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             @foreach($experiences as $experience)
 
-            <div class="relative pl-10 group">
+            <div data-aos="fade-up" class="relative pl-10 group">
 
                 <!-- Dot -->
                 <span class="absolute left-[-7px] top-2 w-3.5 h-3.5 rounded-full 
@@ -516,17 +533,17 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
         <!-- HEADER -->
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
 
-            <div>
+            <div data-aos="fade-up">
                 <h2 class="text-4xl md:text-6xl font-black 
                            leading-[1.2] md:leading-[1.1]
                            pb-2
                            bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                            text-transparent bg-clip-text">
-                    المشاريع
+                    {{ __('Projects') }}
                 </h2>
 
                 <p class="text-slate-400 mt-4 max-w-xl leading-7">
-                    مجموعة أعمال تم تصميمها بأسلوب احترافي يعكس جودة هندسة البرمجيات الحديثة وتجربة مستخدم راقية.
+                    {{ __('A collection of work designed professionally, reflecting modern software engineering quality and a refined user experience.') }}
                 </p>
             </div>
 
@@ -545,8 +562,8 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
                     <span id="selectedText">
                         {{ request('category') 
-                            ? $categories->firstWhere('id', request('category'))->name 
-                            : 'كل الفئات' }}
+                            ? ($categories->firstWhere('id', request('category'))?->name ?? __('All categories')) 
+                            : __('All categories') }}
                     </span>
 
                     <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
@@ -563,7 +580,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                     <!-- ALL -->
                     <a href="/#projects"
                        class="block px-5 py-3 text-slate-300 hover:bg-white/5 hover:text-cyan-300 transition">
-                        كل الفئات
+                        {{ __('All categories') }}
                     </a>
 
                     @foreach($categories as $category)
@@ -586,7 +603,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             @forelse($projects as $project)
 
-            <div class="group relative cursor-pointer">
+            <div data-aos="fade-up" class="group relative cursor-pointer tilt-card">
 
                 <!-- FULL CARD CLICK -->
                 <a href="{{ route('projects.show', $project->slug) }}"
@@ -681,7 +698,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
             @empty
 
             <div class="col-span-3 text-center py-20 text-slate-500">
-                لا توجد مشاريع ضمن هذه الفئة
+                {{ __('No projects in this category') }}
             </div>
 
             @endforelse
@@ -718,15 +735,15 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
     <div class="relative max-w-7xl mx-auto px-6">
 
         <!-- HEADER -->
-        <div class="mb-14">
+        <div data-aos="fade-up" class="mb-14">
             <h2 class="text-4xl md:text-6xl font-black
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                        text-transparent bg-clip-text">
-                الخدمات
+                {{ __('Services') }}
             </h2>
 
             <p class="text-slate-400 mt-4 max-w-xl leading-7">
-                حلول برمجية متكاملة مصممة لتطوير الأعمال وبناء أنظمة احترافية عالية الجودة.
+                {{ __('Complete software solutions designed to grow businesses and build high-quality professional systems.') }}
             </p>
         </div>
 
@@ -735,7 +752,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             @foreach($services as $service)
 
-            <div class="group relative">
+            <div data-aos="fade-up" class="group relative tilt-card">
 
                 <!-- glow -->
                 <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 
@@ -774,7 +791,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                     <div class="flex items-center justify-between">
 
                         <span class="text-cyan-400 font-medium flex items-center gap-2">
-                            عرض التفاصيل
+                            {{ __('View details') }}
                             <i class="fa-solid fa-arrow-left text-xs group-hover:translate-x-1 transition"></i>
                         </span>
 
@@ -806,17 +823,17 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
     <div class="relative max-w-7xl mx-auto px-6">
 
         <!-- HEADER -->
-        <div class="mb-14">
+        <div data-aos="fade-up" class="mb-14">
             <h2 class="text-4xl md:text-6xl font-black 
                        leading-[1.2] md:leading-[1.1] 
                        pb-2
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 
                        text-transparent bg-clip-text">
-                آراء العملاء
+                {{ __('Client testimonials') }}
             </h2>
 
             <p class="text-slate-400 mt-4 max-w-xl">
-                تجارب حقيقية من عملاء وثقوا بالحلول البرمجية.
+                {{ __('Real experiences from clients who trusted the software solutions.') }}
             </p>
         </div>
 
@@ -825,7 +842,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             <!-- LEFT BUTTON -->
             <button id="prevBtn"
-                class="absolute -left-6 top-1/2 -translate-y-1/2 z-10
+                class="magnetic absolute -left-6 top-1/2 -translate-y-1/2 z-10
                        w-14 h-14 rounded-full
                        bg-white/10 hover:bg-white/20 backdrop-blur
                        flex items-center justify-center
@@ -835,7 +852,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
             <!-- RIGHT BUTTON -->
             <button id="nextBtn"
-                class="absolute -right-6 top-1/2 -translate-y-1/2 z-10
+                class="magnetic absolute -right-6 top-1/2 -translate-y-1/2 z-10
                        w-14 h-14 rounded-full
                        bg-white/10 hover:bg-white/20 backdrop-blur
                        flex items-center justify-center
@@ -849,10 +866,10 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
                 @foreach($testimonials as $testimonial)
 
-                <div class="min-w-full md:min-w-[50%] lg:min-w-[33.333%]">
+                <div data-aos="fade-up" class="min-w-full md:min-w-[50%] lg:min-w-[33.333%]">
 
                     <!-- CARD -->
-                    <div class="group relative rounded-3xl p-7 bg-white/5 backdrop-blur-xl border border-white/10
+                    <div class="group relative rounded-3xl p-7 bg-white/5 backdrop-blur-xl border border-white/10 tilt-card
                                 transition-all duration-500 ease-out
                                 hover:-translate-y-3 hover:border-cyan-400/40 hover:bg-white/10
                                 hover:shadow-[0_20px_60px_-15px_rgba(34,211,238,0.25)]">
@@ -917,30 +934,30 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
     <div class="relative max-w-7xl mx-auto px-6">
 
         <!-- HEADER -->
-        <div class="text-center mb-14">
+        <div data-aos="fade-up" class="text-center mb-14">
             <h2 class="text-4xl md:text-6xl font-black
                        leading-[1.2] md:leading-[1.1]
                        pb-2
                        bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400
                        text-transparent bg-clip-text">
-                تواصل معي
+                {{ __('Contact me') }}
             </h2>
 
             <p class="text-slate-400 mt-4 flex items-center justify-center gap-2">
                 <i class="fa-solid fa-paper-plane text-cyan-400"></i>
-                خلينا نبني شي قوي سوا
+                {{ __('Let us build something great together') }}
             </p>
         </div>
 
-        <!-- SUCCESS -->
-        @if(session('success'))
-            <div class="mb-10 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-300 text-center">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <!-- FORM -->
-        <form id="contactForm" action="{{ route('contact.store') }}" method="POST" class="space-y-6">
+        <form id="contactForm" data-aos="fade-up" action="{{ route('contact.store') }}" method="POST" class="space-y-6"
+              data-success-title="{{ __('Message sent!') }}"
+              data-success-text="{{ __('Your message has been sent successfully') }}"
+              data-error-title="{{ __('Could not send message') }}"
+              data-validation-text="{{ __('Please check the highlighted fields and try again.') }}"
+              data-server-text="{{ __('Something went wrong on our side. Please try again in a moment.') }}"
+              data-network-text="{{ __('Connection problem. Check your internet and try again.') }}"
+              data-session-text="{{ __('Your session has expired. Please refresh the page and try again.') }}">
             @csrf
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -948,7 +965,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                 <!-- NAME -->
                 <div class="group transition duration-300 hover:-translate-y-0.5">
                     <label class="text-sm text-slate-400 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-user text-cyan-400"></i> الاسم
+                        <i class="fa-solid fa-user text-cyan-400"></i> {{ __('Name') }}
                     </label>
 
                     <input type="text" name="name" value="{{ old('name') }}"
@@ -963,14 +980,14 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                focus:-translate-y-0.5" />
 
                     @error('name')
-                        <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
+                        <p data-field-error class="text-red-400 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <!-- EMAIL -->
                 <div class="group transition duration-300 hover:-translate-y-0.5">
                     <label class="text-sm text-slate-400 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-envelope text-cyan-400"></i> الإيميل
+                        <i class="fa-solid fa-envelope text-cyan-400"></i> {{ __('Email') }}
                     </label>
 
                     <input type="email" name="email" value="{{ old('email') }}"
@@ -985,7 +1002,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                                focus:-translate-y-0.5" />
 
                     @error('email')
-                        <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
+                        <p data-field-error class="text-red-400 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -994,7 +1011,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
             <!-- SUBJECT -->
             <div class="group transition duration-300 hover:-translate-y-0.5">
                 <label class="text-sm text-slate-400 mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-tag text-cyan-400"></i> الموضوع
+                    <i class="fa-solid fa-tag text-cyan-400"></i> {{ __('Subject') }}
                 </label>
 
                 <input type="text" name="subject" value="{{ old('subject') }}"
@@ -1009,14 +1026,14 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                            focus:-translate-y-0.5" />
 
                 @error('subject')
-                    <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
+                    <p data-field-error class="text-red-400 text-sm mt-2">{{ $message }}</p>
                 @enderror
             </div>
 
             <!-- MESSAGE -->
             <div class="group transition duration-300 hover:-translate-y-0.5">
                 <label class="text-sm text-slate-400 mb-2 flex items-center gap-2">
-                    <i class="fa-solid fa-message text-cyan-400"></i> الرسالة
+                    <i class="fa-solid fa-message text-cyan-400"></i> {{ __('Message') }}
                 </label>
 
                 <textarea name="message" rows="6"
@@ -1031,13 +1048,13 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                            focus:-translate-y-0.5 resize-none">{{ old('message') }}</textarea>
 
                 @error('message')
-                    <p class="text-red-400 text-sm mt-2">{{ $message }}</p>
+                    <p data-field-error class="text-red-400 text-sm mt-2">{{ $message }}</p>
                 @enderror
             </div>
 
             <!-- BUTTON -->
             <button id="submitBtn" type="submit"
-                class="group relative w-full md:w-auto px-10 py-3 rounded-2xl
+                class="group magnetic relative w-full md:w-auto px-10 py-3 rounded-2xl
                        bg-gradient-to-r from-cyan-500 to-blue-500
                        text-slate-950 font-bold overflow-hidden
                        transition duration-300 hover:scale-[1.02] active:scale-[0.98]
@@ -1045,7 +1062,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 
                 <span id="btnNormal" class="relative z-10 flex items-center justify-center gap-2 transition duration-300">
                     <i class="fa-solid fa-paper-plane"></i>
-                    إرسال الرسالة
+                    {{ __('Send message') }}
                 </span>
 
                 <span id="btnSending" class="hidden relative z-10 items-center justify-center gap-3">
@@ -1053,7 +1070,7 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
                         <i class="fa-solid fa-envelope absolute left-0 top-1/2 -translate-y-1/2 text-slate-950 text-lg"></i>
                         <span class="letter-fly absolute left-1 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-slate-950"></span>
                     </span>
-                    <span>يتم الإرسال...</span>
+                    <span>{{ __('Sending...') }}</span>
                     <i class="fa-solid fa-inbox inbox-bounce text-slate-950"></i>
                 </span>
 
@@ -1087,37 +1104,6 @@ class="relative py-28 border-t border-white/10 bg-slate-900 text-white overflow-
 }
 </style>
 
-<script>
-const contactForm = document.getElementById("contactForm");
-const submitBtn = document.getElementById("submitBtn");
-const btnNormal = document.getElementById("btnNormal");
-const btnSending = document.getElementById("btnSending");
-
-let submitLocked = false;
-
-contactForm.addEventListener("submit", function (e) {
-    if (submitLocked) {
-        e.preventDefault();
-        return;
-    }
-
-    if (!contactForm.checkValidity()) {
-        return;
-    }
-
-    e.preventDefault();
-    submitLocked = true;
-
-    submitBtn.disabled = true;
-    btnNormal.classList.add("hidden");
-    btnSending.classList.remove("hidden");
-    btnSending.classList.add("flex");
-
-    setTimeout(() => {
-        contactForm.submit();
-    }, 1100);
-});
-</script>
 <footer class="relative border-t border-white/10 bg-slate-900 text-white overflow-hidden py-10">
 
     <!-- Background glow -->
@@ -1135,18 +1121,40 @@ contactForm.addEventListener("submit", function (e) {
             <!-- LEFT -->
             <p class="text-slate-400 text-sm flex items-center gap-2">
                 <i class="fa-regular fa-copyright text-cyan-400"></i>
-                {{ date('Y') }} جميع الحقوق محفوظة
+                {{ date('Y') }} {{ __('All rights reserved') }}
             </p>
 
             <!-- CENTER (optional branding vibe) -->
             <div class="text-slate-500 text-sm flex items-center gap-2">
-                صنع بـ
+                {{ __('Made with') }}
                 <i class="fa-solid fa-heart text-red-400 animate-pulse"></i>
-                و شغف تقني
+                {{ __('and a passion for tech') }}
             </div>
 
             <!-- RIGHT LINKS -->
-            <div class="flex items-center gap-6">
+            <div class="flex flex-wrap items-center justify-center gap-6">
+
+                @if($setting?->email)
+                <a href="mailto:{{ $setting->email }}"
+                   class="group flex items-center gap-2 text-slate-400 hover:text-white transition">
+
+                    <i class="fa-solid fa-envelope text-lg group-hover:text-cyan-400 transition"></i>
+                    <span class="text-sm" dir="ltr">{{ $setting->email }}</span>
+
+                    <span class="h-[1px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                @endif
+
+                @if($setting?->phone)
+                <a href="tel:{{ $setting->phone }}"
+                   class="group flex items-center gap-2 text-slate-400 hover:text-white transition">
+
+                    <i class="fa-solid fa-phone text-lg group-hover:text-cyan-400 transition"></i>
+                    <span class="text-sm" dir="ltr">{{ $setting->phone }}</span>
+
+                    <span class="h-[1px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                @endif
 
                 @if($setting?->github)
                 <a href="{{ $setting->github }}" target="_blank"
@@ -1177,10 +1185,6 @@ contactForm.addEventListener("submit", function (e) {
         <!-- divider glow line -->
         <div class="mt-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
-        <!-- bottom tiny note -->
-        <div class="text-center mt-6 text-xs text-slate-600">
-            Designed & Built with modern UI aesthetics ✨
-        </div>
 
     </div>
 </footer>

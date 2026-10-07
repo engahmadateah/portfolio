@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('settings', 'favicon')) {
+            return;
+        }
+
         Schema::table('settings', function (Blueprint $table) {
-            Schema::table('settings', function (Blueprint $table) {
-                $table->string('favicon')->nullable();
-            });
+            $table->string('favicon')->nullable();
         });
     }
 
@@ -24,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('settings', function (Blueprint $table) {
-            //
+            $table->dropColumn('favicon');
         });
     }
 };

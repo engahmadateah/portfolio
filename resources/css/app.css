@@ -1,9 +1,9 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
 
 html {
     scroll-behavior: smooth;
@@ -36,7 +36,17 @@ body {
     @apply bg-cyan-400;
 }
 
-/* Light Mode */
+/* ==========================================================
+   Light Mode
+   Every dark-surface / dark-text utility used across the site
+   has an explicit light-mode replacement below, so nothing is
+   left unstyled (which is what was causing invisible text).
+   ========================================================== */
+
+.light ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+}
+
 .light body {
     @apply bg-white text-slate-900;
 }
@@ -45,26 +55,96 @@ body {
     @apply border-slate-200;
 }
 
-.light .bg-slate-900 {
-    @apply bg-white;
+/* Surfaces — raw values on purpose: chaining @apply between
+   same-named color utilities trips Tailwind's circular-@apply
+   guard, so surfaces/text/borders are set directly here. */
+.light .bg-slate-950 { background-color: #ffffff !important; }
+.light .bg-slate-900 { background-color: #f8fafc !important; }
+.light .bg-slate-900\/15 { background-color: rgba(255, 255, 255, 0.7) !important; }
+.light .bg-slate-900\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
+.light .bg-slate-900\/95 { background-color: rgba(255, 255, 255, 0.9) !important; }
+.light .bg-slate-800 { background-color: #f1f5f9 !important; }
+.light .bg-white\/5 { background-color: rgba(15, 23, 42, 0.04) !important; }
+.light .bg-white\/10 { background-color: rgba(15, 23, 42, 0.06) !important; }
+.light .bg-white\/20 { background-color: rgba(15, 23, 42, 0.1) !important; }
+.light .from-white\/5 { --tw-gradient-from: rgba(15, 23, 42, 0.04) var(--tw-gradient-from-position) !important; --tw-gradient-to: rgba(15, 23, 42, 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+.light .via-white\/10 { --tw-gradient-to: rgba(15, 23, 42, 0) var(--tw-gradient-to-position) !important; --tw-gradient-stops: var(--tw-gradient-from), rgba(15, 23, 42, 0.1) var(--tw-gradient-via-position), var(--tw-gradient-to) !important; }
+
+/* Borders */
+.light .border-slate-700 { border-color: #cbd5e1 !important; }
+.light .border-slate-800 { border-color: #e2e8f0 !important; }
+.light .border-white\/10 { border-color: #e2e8f0 !important; }
+
+/* Text */
+.light .text-white { color: #0f172a !important; }
+.light .text-white\/80 { color: #334155 !important; }
+.light .text-slate-100 { color: #1e293b !important; }
+.light .text-slate-200 { color: #334155 !important; }
+.light .text-slate-300 { color: #475569 !important; }
+.light .text-slate-400 { color: #64748b !important; }
+.light .text-slate-500 { color: #475569 !important; }
+
+/* Interactive states */
+.light .hover\:bg-white\/10:hover { background-color: rgba(15, 23, 42, 0.06) !important; }
+.light .hover\:bg-white\/20:hover { background-color: rgba(15, 23, 42, 0.1) !important; }
+.light .hover\:bg-white\/5:hover { background-color: rgba(15, 23, 42, 0.04) !important; }
+.light .hover\:bg-white\/\[0\.07\]:hover { background-color: rgba(15, 23, 42, 0.05) !important; }
+.light .hover\:text-white:hover { color: #0f172a !important; }
+.light .placeholder\:text-slate-500::placeholder { color: #94a3b8 !important; }
+
+/* Blog article prose — Tailwind Typography renders these via
+   CSS custom properties (base) and scoped :where() selectors
+   (the explicit prose-p:/-headings:/-strong: modifiers), so both
+   need matching light-mode overrides. */
+.light .prose-invert {
+    --tw-prose-body: #334155;
+    --tw-prose-headings: #0f172a;
+    --tw-prose-lead: #475569;
+    --tw-prose-links: #0891b2;
+    --tw-prose-bold: #0f172a;
+    --tw-prose-counters: #64748b;
+    --tw-prose-bullets: #cbd5e1;
+    --tw-prose-hr: #e2e8f0;
+    --tw-prose-quotes: #0f172a;
+    --tw-prose-quote-borders: #22d3ee;
+    --tw-prose-captions: #64748b;
+    --tw-prose-kbd: #0f172a;
+    --tw-prose-code: #0e7490;
+    --tw-prose-pre-code: #e2e8f0;
+    --tw-prose-pre-bg: #0f172a;
+    --tw-prose-th-borders: #cbd5e1;
+    --tw-prose-td-borders: #e2e8f0;
 }
 
-.light .border-slate-800 {
-    @apply border-slate-200;
+.light .prose-p\:text-slate-300 :is(:where(p):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    color: #475569 !important;
 }
 
-.light .text-slate-400 {
-    @apply text-slate-600;
+.light .prose-headings\:text-white :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    color: #0f172a !important;
 }
 
-.light .text-white {
-    @apply text-slate-900;
+.light .prose-strong\:text-white :is(:where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    color: #0f172a !important;
 }
 
-.light .bg-slate-800 {
-    @apply bg-slate-100;
+/* Cyan accent text — cyan-300/400 are pastel and nearly invisible
+   on a light background, so light mode uses darker, readable
+   cyan shades instead (covers plain, hover and group-hover use). */
+.light .text-cyan-300 { color: #0e7490 !important; }
+.light .text-cyan-400 { color: #0891b2 !important; }
+.light .hover\:text-cyan-300:hover { color: #0e7490 !important; }
+.light .hover\:text-cyan-400:hover { color: #0891b2 !important; }
+.light .group:hover .group-hover\:text-cyan-300 { color: #0e7490 !important; }
+.light .group:hover .group-hover\:text-cyan-400 { color: #0891b2 !important; }
+.light .prose-a\:text-cyan-400 :is(:where(a):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    color: #0e7490 !important;
+}
+.light .prose-code\:text-cyan-300 :is(:where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
+    color: #0e7490 !important;
 }
 
+/* Navbar */
 .light nav {
     @apply bg-white/80 text-slate-900 border-slate-200 backdrop-blur-xl;
 }
@@ -77,13 +157,15 @@ body {
     @apply text-cyan-500;
 }
 
-.light nav button {
+.light nav button,
+.light nav a.border {
     @apply bg-white text-slate-900 border-slate-300;
 }
 
 .light #mobile-menu {
     @apply bg-white border-slate-200 text-slate-900;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -91,4 +173,302 @@ body {
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+/* ==========================================================
+   Motion / animation utilities
+   Scroll-reveal itself is handled by AOS (imported in app.js) —
+   the rules below are the extra premium touches AOS doesn't cover.
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Animated gradient text (hero name, section eyebrows) */
+.text-gradient-animate {
+    background-size: 200% auto;
+    animation: gradient-pan 6s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Magnetic buttons — JS sets --mx/--my, CSS does the subtle pull */
+.magnetic {
+    --mx: 0px;
+    --my: 0px;
+    transform: translate(var(--mx), var(--my));
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tilt cards — JS sets --rx/--ry on pointer move */
+.tilt-card {
+    --rx: 0deg;
+    --ry: 0deg;
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+/* Infinite marquee for the tech-stack strip */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Soft floating blobs used behind hero / section backgrounds */
+.float-slow {
+    animation: float-slow 9s ease-in-out infinite;
+}
+
+.float-slower {
+    animation: float-slow 13s ease-in-out infinite;
+    animation-delay: -4s;
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(14px, -18px); }
+}
+
+/* Button shine sweep on hover */
+.btn-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+}
+
+.btn-shine:hover::after {
+    transform: translateX(120%);
+}
+
+/* Cursor glow that follows the pointer (desktop only, see app.js) */
+#cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 320px;
+    margin: -160px 0 0 -160px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12), transparent 70%);
+    transform: translate3d(var(--x, 0), var(--y, 0), 0);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+#cursor-glow.is-active {
+    opacity: 1;
+}
+
+/* Animated count-up numbers */
+[data-counter] {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Page-load fade */
+.page-fade-in {
+    animation: page-fade-in 0.6s ease both;
+}
+
+@keyframes page-fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Decorative animated backdrops (blog header, etc.) */
+@keyframes grid-drift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+}
+
+.bg-grid-drift {
+    background-image:
+        linear-gradient(to right, #0ea5e9 1px, transparent 1px),
+        linear-gradient(to bottom, #0ea5e9 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-drift 12s linear infinite;
+}
+
+@keyframes sheen-sweep {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+}
+
+.sheen-sweep {
+    background-image: linear-gradient(120deg, transparent, rgba(34, 211, 238, 0.15), transparent);
+    animation: sheen-sweep 2.5s linear infinite;
+}
+
+@keyframes underline-flow {
+    0%, 100% { transform: translateX(-30%); }
+    50% { transform: translateX(30%); }
+}
+
+.underline-flow {
+    animation: underline-flow 4s linear infinite;
+}
+
+/* Reading progress bar (blog article) */
+#reading-progress {
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+[dir="rtl"] #reading-progress {
+    transform-origin: right;
+}
+
+/* ---------------------------------------------------------
+   Toast notifications (Notyf) — glass style matching the site
+--------------------------------------------------------- */
+.notyf {
+    /* stay below the fixed navbar */
+    padding-top: 88px !important;
+    z-index: 10000 !important;
+}
+
+.notyf__toast {
+    position: relative;
+    max-width: min(92vw, 420px) !important;
+    min-width: min(92vw, 320px);
+    padding: 0 !important;
+    border-radius: 18px !important;
+    background: rgba(15, 23, 42, 0.88) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03) inset !important;
+    color: #fff;
+    font-family: 'Cairo', sans-serif;
+}
+
+.notyf__wrapper {
+    padding: 16px 18px !important;
+    align-items: flex-start !important;
+    gap: 14px;
+}
+
+.notyf__icon {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 18px;
+}
+
+.notyf__icon i {
+    color: inherit;
+}
+
+.notyf__message {
+    flex: 1;
+    padding: 0 !important;
+    line-height: 1.5;
+}
+
+.notyf__message .toast-title {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.notyf__message .toast-text {
+    margin-top: 2px;
+    font-size: 13.5px;
+    color: #cbd5e1;
+}
+
+.notyf__toast--success { border-color: rgba(52, 211, 153, 0.35); }
+.notyf__toast--success .notyf__icon { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+.notyf__toast--error { border-color: rgba(248, 113, 113, 0.35); }
+.notyf__toast--error .notyf__icon { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+.notyf__dismiss {
+    top: 12px !important;
+    right: auto !important;
+    inset-inline-end: 12px;
+    transform: none !important;
+    height: auto !important;
+    width: auto !important;
+}
+
+.notyf__dismiss-btn {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 999px;
+    width: 26px !important;
+    height: 26px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.notyf__dismiss-btn:hover { opacity: 1; }
+.notyf__dismiss-btn::before,
+.notyf__dismiss-btn::after { background: #fff !important; }
+
+/* keep text clear of the close button */
+.notyf__message { padding-inline-end: 30px !important; }
+
+/* countdown bar */
+.notyf__toast::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    inset-inline: 0;
+    height: 3px;
+    transform-origin: left center;
+    animation: toastTimer 6s linear forwards;
+}
+
+[dir='rtl'] .notyf__toast::after { transform-origin: right center; }
+
+.notyf__toast--success::after { background: linear-gradient(90deg, #34d399, #22d3ee); }
+.notyf__toast--error::after   { background: linear-gradient(90deg, #f87171, #fb923c); }
+
+@keyframes toastTimer {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+}
+
+/* invalid contact fields */
+.field-invalid {
+    border-color: rgba(248, 113, 113, 0.7) !important;
+    box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.25) !important;
 }

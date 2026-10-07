@@ -1,12 +1,15 @@
+import typography from '@tailwindcss/typography'
+import forms from '@tailwindcss/forms'
+
 export default {
     darkMode: 'class',
-  
+
     content: [
       './resources/**/*.blade.php',
       './resources/**/*.js',
       './resources/**/*.vue',
     ],
-  
+
     theme: {
       extend: {
         colors: {
@@ -19,6 +22,6 @@ export default {
         },
       },
     },
-  
-    plugins: [],
+
+    plugins: [typography, forms],
   }

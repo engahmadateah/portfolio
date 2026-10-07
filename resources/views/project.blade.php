@@ -22,7 +22,7 @@
         <a href="/#projects"
            class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-10 transition">
             <i class="fa-solid fa-arrow-left"></i>
-            العودة للمشاريع
+            {{ __('Back to projects') }}
         </a>
 
         <!-- HERO IMAGE WITH STRONG ANIMATED GLOW -->
@@ -99,7 +99,7 @@
 
             <div class="flex items-center gap-2 mb-6 text-slate-200">
                 <i class="fa-solid fa-images text-cyan-400"></i>
-                <h2 class="text-xl font-bold">صور المشروع</h2>
+                <h2 class="text-xl font-bold">{{ __('Project images') }}</h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -165,7 +165,7 @@
 
         <div class="flex items-center gap-2 mb-12 text-white">
             <i class="fa-solid fa-layer-group text-cyan-400"></i>
-            <h2 class="text-3xl font-black">مشاريع أخرى</h2>
+            <h2 class="text-3xl font-black">{{ __('Other projects') }}</h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
@@ -208,22 +208,5 @@
 
 </section>
 @endif
-
-<!-- LIGHTBOX -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        zoomable: true,
-        openEffect: 'zoom',
-        closeEffect: 'fade'
-    });
-});
-</script>
 
 @endsection
