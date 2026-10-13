@@ -13,10 +13,7 @@ gsap.registerPlugin(ScrollTrigger)
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const isTouch = window.matchMedia('(pointer: coarse)').matches
 
-/* ---------------------------------------------------------
-   Navbar — shrinks and gets more opaque once you scroll past
-   the hero, and highlights whichever section is in view
---------------------------------------------------------- */
+
 const siteNav = document.getElementById('site-nav')
 const siteNavRow = document.getElementById('site-nav-row')
 
@@ -63,9 +60,7 @@ if (navLinks.length) {
     })
 }
 
-/* ---------------------------------------------------------
-   Hero background — soft parallax that follows the cursor
---------------------------------------------------------- */
+
 const heroSection = document.querySelector('[data-hero-parallax]')
 
 if (heroSection && !prefersReducedMotion && !isTouch) {
@@ -98,9 +93,7 @@ if (heroSection && !prefersReducedMotion && !isTouch) {
     })
 }
 
-/* ---------------------------------------------------------
-   Page loader — fades out once everything has loaded
---------------------------------------------------------- */
+
 window.addEventListener('load', () => {
     const loader = document.getElementById('page-loader')
     if (!loader) return
@@ -111,9 +104,6 @@ window.addEventListener('load', () => {
     }, prefersReducedMotion ? 0 : 1200)
 })
 
-/* ---------------------------------------------------------
-   Project gallery lightbox (only present on project pages)
---------------------------------------------------------- */
 if (document.querySelector('.glightbox')) {
     GLightbox({
         selector: '.glightbox',
@@ -125,9 +115,7 @@ if (document.querySelector('.glightbox')) {
     })
 }
 
-/* ---------------------------------------------------------
-   Reading progress bar (blog article pages only)
---------------------------------------------------------- */
+
 const progressBar = document.getElementById('reading-progress')
 const article = document.getElementById('article-content')
 
@@ -147,9 +135,7 @@ if (progressBar && article) {
     }
 }
 
-/* ---------------------------------------------------------
-   Menu + theme (unchanged behaviour, just guarded)
---------------------------------------------------------- */
+
 window.toggleMenu = function () {
     const menu = document.getElementById('mobile-menu')
     if (menu) menu.classList.toggle('hidden')
@@ -175,9 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
-/* ---------------------------------------------------------
-   Project / testimonial carousel
---------------------------------------------------------- */
+
 const track = document.getElementById('track')
 const nextBtn = document.getElementById('nextBtn')
 const prevBtn = document.getElementById('prevBtn')
@@ -187,10 +171,7 @@ if (track && nextBtn && prevBtn) {
     prevBtn.onclick = () => track.scrollBy({ left: -350, behavior: 'smooth' })
 }
 
-/* ---------------------------------------------------------
-   Smooth inertia scrolling (desktop only — mobile keeps
-   native scroll for better touch responsiveness)
---------------------------------------------------------- */
+
 let lenis = null
 
 if (!prefersReducedMotion && !isTouch) {
@@ -208,9 +189,7 @@ if (!prefersReducedMotion && !isTouch) {
     gsap.ticker.lagSmoothing(0)
 }
 
-/* ---------------------------------------------------------
-   Scroll-reveal (AOS) — subtle, fast, plays once
---------------------------------------------------------- */
+
 AOS.init({
     duration: 700,
     easing: 'ease-out-cubic',
@@ -221,9 +200,7 @@ AOS.init({
 
 window.addEventListener('load', () => AOS.refresh())
 
-/* ---------------------------------------------------------
-   Hero entrance — staggered reveal of the first screen
---------------------------------------------------------- */
+
 if (!prefersReducedMotion) {
     gsap.from('[data-hero-in]', {
         y: 24,
@@ -235,10 +212,7 @@ if (!prefersReducedMotion) {
     })
 }
 
-/* ---------------------------------------------------------
-   Animated counters (stats section) — counts up once
-   when it scrolls into view
---------------------------------------------------------- */
+
 document.querySelectorAll('[data-counter]').forEach((el) => {
     const target = parseFloat(el.dataset.counter)
     const suffix = el.dataset.counterSuffix || ''
@@ -268,9 +242,7 @@ document.querySelectorAll('[data-counter]').forEach((el) => {
     })
 })
 
-/* ---------------------------------------------------------
-   Magnetic buttons — pulls toward the cursor on hover
---------------------------------------------------------- */
+
 if (!prefersReducedMotion && !isTouch) {
     document.querySelectorAll('.magnetic').forEach((el) => {
         const strength = 18
@@ -290,9 +262,7 @@ if (!prefersReducedMotion && !isTouch) {
     })
 }
 
-/* ---------------------------------------------------------
-   Tilt cards — subtle 3D tilt following the cursor
---------------------------------------------------------- */
+
 if (!prefersReducedMotion && !isTouch) {
     document.querySelectorAll('.tilt-card').forEach((el) => {
         const max = 6
@@ -314,9 +284,7 @@ if (!prefersReducedMotion && !isTouch) {
     })
 }
 
-/* ---------------------------------------------------------
-   Cursor glow — soft light that follows the pointer
---------------------------------------------------------- */
+
 if (!prefersReducedMotion && !isTouch) {
     const glow = document.getElementById('cursor-glow')
 
@@ -331,11 +299,6 @@ if (!prefersReducedMotion && !isTouch) {
     }
 }
 
-/* ---------------------------------------------------------
-   Toast notifications (Notyf) — elegant pop-ups that appear
-   on screen wherever the visitor currently is
---------------------------------------------------------- */
-const TOAST_DURATION = 6000
 
 const notyf = new Notyf({
     duration: TOAST_DURATION,
@@ -374,21 +337,18 @@ window.showToast = function (type, title, text = '') {
     })
 }
 
-/* Flash messages from a normal (non-AJAX) redirect */
+
 if (window.__flash) {
     const flash = window.__flash
 
-    // wait until the page loader has finished
+   
     setTimeout(() => {
         if (flash.success) window.showToast('success', flash.successTitle, escapeHtml(flash.success))
         else if (flash.error) window.showToast('error', flash.errorTitle, escapeHtml(flash.error))
     }, prefersReducedMotion ? 300 : 1900)
 }
 
-/* ---------------------------------------------------------
-   Contact form — sends via fetch so the page never reloads
-   or jumps, then shows a success / error toast
---------------------------------------------------------- */
+
 const contactForm = document.getElementById('contactForm')
 
 if (contactForm) {
@@ -431,7 +391,7 @@ if (contactForm) {
         if (firstField) firstField.focus({ preventScroll: true })
     }
 
-    // remove the red state as soon as the visitor edits the field
+    
     contactForm.addEventListener('input', (e) => {
         const field = e.target
         if (!field.classList?.contains('field-invalid')) return
@@ -454,7 +414,7 @@ if (contactForm) {
         setBusy(true)
         const startedAt = performance.now()
 
-        // keep the "sending" animation visible for a moment even on fast responses
+        
         const settle = () =>
             new Promise((resolve) =>
                 setTimeout(resolve, Math.max(0, 1100 - (performance.now() - startedAt)))

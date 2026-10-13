@@ -36,12 +36,7 @@ body {
     @apply bg-cyan-400;
 }
 
-/* ==========================================================
-   Light Mode
-   Every dark-surface / dark-text utility used across the site
-   has an explicit light-mode replacement below, so nothing is
-   left unstyled (which is what was causing invisible text).
-   ========================================================== */
+
 
 .light ::-webkit-scrollbar-track {
     @apply bg-slate-100;
@@ -55,9 +50,6 @@ body {
     @apply border-slate-200;
 }
 
-/* Surfaces — raw values on purpose: chaining @apply between
-   same-named color utilities trips Tailwind's circular-@apply
-   guard, so surfaces/text/borders are set directly here. */
 .light .bg-slate-950 { background-color: #ffffff !important; }
 .light .bg-slate-900 { background-color: #f8fafc !important; }
 .light .bg-slate-900\/15 { background-color: rgba(255, 255, 255, 0.7) !important; }
@@ -92,10 +84,7 @@ body {
 .light .hover\:text-white:hover { color: #0f172a !important; }
 .light .placeholder\:text-slate-500::placeholder { color: #94a3b8 !important; }
 
-/* Blog article prose — Tailwind Typography renders these via
-   CSS custom properties (base) and scoped :where() selectors
-   (the explicit prose-p:/-headings:/-strong: modifiers), so both
-   need matching light-mode overrides. */
+
 .light .prose-invert {
     --tw-prose-body: #334155;
     --tw-prose-headings: #0f172a;
@@ -128,9 +117,7 @@ body {
     color: #0f172a !important;
 }
 
-/* Cyan accent text — cyan-300/400 are pastel and nearly invisible
-   on a light background, so light mode uses darker, readable
-   cyan shades instead (covers plain, hover and group-hover use). */
+
 .light .text-cyan-300 { color: #0e7490 !important; }
 .light .text-cyan-400 { color: #0891b2 !important; }
 .light .hover\:text-cyan-300:hover { color: #0e7490 !important; }
@@ -175,11 +162,7 @@ body {
     scrollbar-width: none;
 }
 
-/* ==========================================================
-   Motion / animation utilities
-   Scroll-reveal itself is handled by AOS (imported in app.js) —
-   the rules below are the extra premium touches AOS doesn't cover.
-   ========================================================== */
+
 
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -192,7 +175,7 @@ body {
     }
 }
 
-/* Animated gradient text (hero name, section eyebrows) */
+
 .text-gradient-animate {
     background-size: 200% auto;
     animation: gradient-pan 6s ease-in-out infinite;
@@ -204,7 +187,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Magnetic buttons — JS sets --mx/--my, CSS does the subtle pull */
+
 .magnetic {
     --mx: 0px;
     --my: 0px;
@@ -212,7 +195,7 @@ body {
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Tilt cards — JS sets --rx/--ry on pointer move */
+
 .tilt-card {
     --rx: 0deg;
     --ry: 0deg;
@@ -221,7 +204,7 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Infinite marquee for the tech-stack strip */
+
 .marquee-track {
     display: flex;
     width: max-content;
@@ -237,7 +220,7 @@ body {
     to { transform: translateX(-50%); }
 }
 
-/* Soft floating blobs used behind hero / section backgrounds */
+
 .float-slow {
     animation: float-slow 9s ease-in-out infinite;
 }
@@ -271,7 +254,7 @@ body {
     transform: translateX(120%);
 }
 
-/* Cursor glow that follows the pointer (desktop only, see app.js) */
+
 #cursor-glow {
     position: fixed;
     top: 0;
@@ -307,7 +290,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Decorative animated backdrops (blog header, etc.) */
+
 @keyframes grid-drift {
     0% { transform: translateY(0); }
     100% { transform: translateY(60px); }
@@ -350,9 +333,7 @@ body {
     transform-origin: right;
 }
 
-/* ---------------------------------------------------------
-   Toast notifications (Notyf) — glass style matching the site
---------------------------------------------------------- */
+
 .notyf {
     /* stay below the fixed navbar */
     padding-top: 88px !important;

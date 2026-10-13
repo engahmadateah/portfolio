@@ -9,7 +9,7 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        // عند فشل التحقق: Laravel يرجّع تلقائياً JSON بكود 422 لطلبات الـ AJAX
+        
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
